@@ -37,6 +37,20 @@
   border: 1px solid red;
 }
 
+.filter-btn {
+  padding: 10px;
+  border: none;
+  background-color: cadetblue;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+}
+
+.filter-btn:hover {
+  cursor: pointer;
+  background-color: rgb(76, 155, 158);
+}
+
 .res-container {
   margin: 20px 0;
   display: flex;
