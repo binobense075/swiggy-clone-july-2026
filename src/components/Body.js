@@ -10,6 +10,8 @@ const Body = () => {
 
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
 
+  const [hasError, setHasError] = useState(false);
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -20,13 +22,21 @@ const Body = () => {
       const json = await data.json();
       const restaurants =
         json?.data?.cards?.[1]?.card?.card?.gridElements?.infoWithStyle
-          ?.restaurants;
+          ?.restaurants ?? [];
       setListOfRestaurants(restaurants);
       setFilteredRestaurants(restaurants);
     } catch (error) {
       console.error("Failed to Fetch Restaurants", error);
+      setHasError(true);
     }
   };
+
+  if (hasError)
+    return (
+      <h1 style={{ textAlign: "center", marginTop: "50px" }}>
+        Something went wrong please, try again
+      </h1>
+    );
 
   return listOfRestaurants.length === 0 ? (
     <Shimmer />
@@ -72,7 +82,7 @@ const Body = () => {
           </button>
         </div>
       </div>
-      {filteredRestaurants.length === 0 && listOfRestaurants.length !== 0 && (
+      {filteredRestaurants?.length === 0 && listOfRestaurants?.length !== 0 && (
         <h1 style={{ textAlign: "center", marginTop: "50px" }}>
           No restaurants found.
         </h1>
