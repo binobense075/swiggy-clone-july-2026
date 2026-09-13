@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import { SWIGGY_URL } from "../utils/constants";
+import { Link } from "react-router-dom";
 
 const Body = () => {
   const [searchText, setSearchText] = useState("");
@@ -19,6 +20,7 @@ const Body = () => {
   const fetchData = async () => {
     try {
       const data = await fetch(SWIGGY_URL);
+      console.log(data);
       const json = await data.json();
       const restaurants =
         json?.data?.cards?.[1]?.card?.card?.gridElements?.infoWithStyle
@@ -89,7 +91,12 @@ const Body = () => {
       )}
       <div className="res-container">
         {filteredRestaurants.map((restaurant) => (
-          <RestaurantCard resData={restaurant} key={restaurant.info.id} />
+          <Link
+            key={restaurant.info.id}
+            to={"restaurant/" + restaurant.info.id}
+          >
+            <RestaurantCard resData={restaurant} />
+          </Link>
         ))}
       </div>
     </div>
