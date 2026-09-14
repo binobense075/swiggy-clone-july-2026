@@ -115,3 +115,8 @@
   font-weight: bold;
   cursor: pointer;
 }
+
+.user-card {
+  border: 1px solid black;
+  margin: 20px;
+}
