@@ -3,6 +3,7 @@ import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import { SWIGGY_URL } from "../utils/constants";
 import { Link } from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 const Body = () => {
   const [searchText, setSearchText] = useState("");
@@ -32,6 +33,16 @@ const Body = () => {
       setHasError(true);
     }
   };
+
+  const onlineStatus = useOnlineStatus();
+
+  if (!onlineStatus)
+    return (
+      <h1>
+        Ooops seems like you are in offline....Please connect to a network and
+        try again
+      </h1>
+    );
 
   if (hasError)
     return (
