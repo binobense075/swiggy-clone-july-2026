@@ -54,12 +54,12 @@ const Body = () => {
   return listOfRestaurants.length === 0 ? (
     <Shimmer />
   ) : (
-    <div className="body">
+    <div className="m-5">
       <div style={{ display: "flex", justifyContent: "space-between" }}>
         <div className="serach-container">
           <input
             type="text"
-            className="search"
+            className="p-2.5 w-64 outline-none border border-[rgb(240,217,174)] focus:border-[#ffa500]"
             placeholder="Search Restaurants"
             value={searchText}
             onChange={(e) => {
@@ -70,7 +70,7 @@ const Body = () => {
             }}
           />
           <button
-            className="search-btn"
+            className="p-2.5 border border-orange-300 bg-orange-300 text-white cursor-pointer font-bold"
             onClick={() => {
               const filteredList = listOfRestaurants.filter((res) =>
                 res.info.name.toLowerCase().includes(searchText.toLowerCase()),
@@ -83,7 +83,7 @@ const Body = () => {
         </div>
         <div className="filter">
           <button
-            className="filter-btn"
+            className="p-2.5 bg-teal-200 border-none rounded-lg text-white font-bold"
             onClick={() => {
               const filteredList = listOfRestaurants.filter(
                 (res) => res.info.avgRating > 4,
@@ -100,7 +100,7 @@ const Body = () => {
           No restaurants found.
         </h1>
       )}
-      <div className="res-container">
+      <div className="my-5 flex flex-wrap">
         {filteredRestaurants.map((restaurant) => (
           <Link
             key={restaurant.info.id}
