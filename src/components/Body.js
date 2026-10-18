@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import RestaurantCard, { withPromotedLabel } from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import { SWIGGY_URL } from "../utils/constants";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import UserContext from "../utils/UserContext";
 
 const RestaurantCardPromoted = withPromotedLabel(RestaurantCard);
 
@@ -15,6 +16,8 @@ const Body = () => {
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
 
   const [hasError, setHasError] = useState(false);
+
+  const { loggedInUser, setUserName } = useContext(UserContext);
 
   useEffect(() => {
     fetchData();
@@ -58,30 +61,42 @@ const Body = () => {
   ) : (
     <div className="m-5">
       <div style={{ display: "flex", justifyContent: "space-between" }}>
-        <div className="serach-container">
-          <input
-            type="text"
-            className="p-2.5 w-64 outline-none border border-[rgb(240,217,174)] focus:border-[#ffa500]"
-            placeholder="Search Restaurants"
-            value={searchText}
-            onChange={(e) => {
-              setSearchText(e.target.value);
-              if (e.target.value === "") {
-                setFilteredRestaurants(listOfRestaurants);
-              }
-            }}
-          />
-          <button
-            className="p-2.5 border border-orange-300 bg-orange-300 text-white cursor-pointer font-bold"
-            onClick={() => {
-              const filteredList = listOfRestaurants.filter((res) =>
-                res.info.name.toLowerCase().includes(searchText.toLowerCase()),
-              );
-              setFilteredRestaurants(filteredList);
-            }}
-          >
-            Search
-          </button>
+        <div className="flex">
+          <div>
+            <input
+              type="text"
+              className="p-2.5 w-64 outline-none border border-[rgb(240,217,174)] focus:border-[#ffa500]"
+              placeholder="Search Restaurants"
+              value={searchText}
+              onChange={(e) => {
+                setSearchText(e.target.value);
+                if (e.target.value === "") {
+                  setFilteredRestaurants(listOfRestaurants);
+                }
+              }}
+            />
+            <button
+              className="p-2.5 border border-orange-300 bg-orange-300 text-white cursor-pointer font-bold"
+              onClick={() => {
+                const filteredList = listOfRestaurants.filter((res) =>
+                  res.info.name
+                    .toLowerCase()
+                    .includes(searchText.toLowerCase()),
+                );
+                setFilteredRestaurants(filteredList);
+              }}
+            >
+              Search
+            </button>
+          </div>
+          <div className="ml-10">
+            <label>UserName: </label>
+            <input
+              className="p-2.5 w-64 border border-[rgb(240,217,174)] outline-none focus:border-[#ffa500]"
+              value={loggedInUser}
+              onChange={(e) => setUserName(e.target.value)}
+            />
+          </div>
         </div>
         <div className="filter">
           <button
