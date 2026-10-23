@@ -1,6 +1,16 @@
+import { useDispatch } from "react-redux";
 import { CDN_URL } from "../utils/constants";
+import { addItem } from "../utils/cartSlice";
 
 const ItemList = ({ items }) => {
+  const dispatch = useDispatch();
+
+  const handleAddItem = (items) => {
+    dispatch(addItem(items));
+  };
+
+  console.log("componete rendeered");
+
   return (
     <div className="flex  w-full mt-2 p-2 border-b border-gray-300">
       <div className="w-9/12 text-left p-6">
@@ -12,7 +22,10 @@ const ItemList = ({ items }) => {
       <div className="w-3/12 flex justify-center items-center">
         <div className="relative">
           <img src={CDN_URL + items.imageId} className="w-28" />
-          <button className="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-black text-white font-bold px-3 py-1 rounded-lg cursor-pointer">
+          <button
+            className="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-black text-white font-bold px-3 py-1 rounded-lg cursor-pointer"
+            onClick={() => handleAddItem(items)}
+          >
             Add+
           </button>
         </div>

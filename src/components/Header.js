@@ -3,11 +3,17 @@ import { LOGO_URL } from "../utils/constants";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import UserContext from "../utils/UserContext";
+import { useSelector } from "react-redux";
 
 export const Header = () => {
   const [loginLogout, setLoginLogout] = useState("Login");
   const onlineStatus = useOnlineStatus();
   const { loggedInUser } = useContext(UserContext);
+
+  const cart = useSelector((store) => store.cart.items);
+
+  console.log(cart);
+
   return (
     <div className="flex justify-between items-center m-0.5 px-6 border border-orange-100">
       <div className="logo-container">
@@ -27,6 +33,9 @@ export const Header = () => {
           </li>
           <li>
             <Link to="/grocery">Grocery</Link>
+          </li>
+          <li>
+            <Link to="/cart">Cart {cart.length}</Link>
           </li>
           <li className="font-bold text-red-500">{loggedInUser}</li>
           <li>
