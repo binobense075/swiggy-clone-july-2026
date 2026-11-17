@@ -7,7 +7,10 @@ const RestaurantCard = ({ resData }) => {
     resData?.info;
   const { loggedInUser } = useContext(UserContext);
   return (
-    <div className="w-56 p-2.5 m-2.5 bg-gray-100  hover:bg-gray-200 hover:cursor-pointer">
+    <div
+      className="w-56 p-2.5 m-2.5 bg-gray-100  hover:bg-gray-200 hover:cursor-pointer"
+      data-testid="resCard"
+    >
       <img
         className="w-full h-52 rounded-lg"
         alt="res-logo"

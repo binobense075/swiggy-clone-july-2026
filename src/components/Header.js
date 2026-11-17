@@ -12,8 +12,6 @@ export const Header = () => {
 
   const cart = useSelector((store) => store.cart.items);
 
-  console.log(cart);
-
   return (
     <div className="flex justify-between items-center m-0.5 px-6 border border-orange-100">
       <div className="logo-container">

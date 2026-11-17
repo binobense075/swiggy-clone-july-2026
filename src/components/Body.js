@@ -65,6 +65,7 @@ const Body = () => {
           <div>
             <input
               type="text"
+              data-testid="searchInput"
               className="p-2.5 w-64 outline-none border border-[rgb(240,217,174)] focus:border-[#ffa500]"
               placeholder="Search Restaurants"
               value={searchText}

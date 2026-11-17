@@ -9,10 +9,11 @@ const ItemList = ({ items }) => {
     dispatch(addItem(items));
   };
 
-  console.log("componete rendeered");
-
   return (
-    <div className="flex  w-full mt-2 p-2 border-b border-gray-300">
+    <div
+      className="flex  w-full mt-2 p-2 border-b border-gray-300"
+      data-testid="foodItem"
+    >
       <div className="w-9/12 text-left p-6">
         <div className="font-bold">
           {items.name} ₹{items.price / 100}

@@ -8,6 +8,7 @@ const Cart = () => {
   const dispatch = useDispatch();
 
   const handleClearCart = () => {
+    console.log("Clear Cart clicked");
     dispatch(clearCart());
   };
 
